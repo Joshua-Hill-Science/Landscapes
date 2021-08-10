@@ -15,7 +15,8 @@ The goal of this project is to be able to input a landscape image into a model a
   
  To do this we implement a convolutional neural network that looks for patterns in the images. 
  
- (add more about what a cnn does)
+
+ A cnn applies a filter of weights to an input that allows the net to better pick up on important features in the images. 
  
  
  
