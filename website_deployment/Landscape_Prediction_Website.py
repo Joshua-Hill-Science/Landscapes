@@ -95,13 +95,7 @@ else:
     image = Image.open(file)
     prediction, new_image = import_and_predict(image, model)
     explained_image=image_expl(model, new_image)
-    cola , colb, colc = st.columns([1,1,1])
-    with cola:
-        st.image(image,caption="Original Image", width=500)
-    with colb:
-        st.image(new_image,caption="Color Compressed Image", width=500)
-    with colc:
-        color_coder=dict(enumerate(prediction,0))
+    color_coder=dict(enumerate(prediction,0))
     fig_bar, ax = plt.subplots()
     plt.title("Model's Probablity for Class of Given Image")
     ax=plt.bar([0,1,2,3,4,5], prediction, edgecolor='black')
@@ -113,7 +107,13 @@ else:
             ax[i].set_color("b")
     plt.legend(handles=[Best_guess])
     ax=plt.xticks(ticks=[0,1,2,3,4,5],labels=['mountain', 'street', 'glacier', 'buildings', 'sea', 'forest'])
-    st.pyplot(fig_bar)
+    cola , colb, colc = st.columns([1,1,1])
+    with cola:
+        st.image(image,caption="Original Image", width=500)
+    with colb:
+        st.image(new_image,caption="Color Compressed Image", width=500)
+    with colc:
+        st.pyplot(fig_bar)
     _,final,_ =st.columns([1,2,1])
     with final: 
         if st.button('How did the Model do that!?!',  help="Click Me to Find out!"):
