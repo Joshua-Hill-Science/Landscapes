@@ -4,3 +4,8 @@
 __pycache__
 *.db
 *.pytest_cache
+
+clusted_images_train.npz
+clusted_images_test.npz
+test_labels.npz
+train_labels.npz
