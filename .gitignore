@@ -10,3 +10,4 @@ clusted_images_test.npz
 test_labels.npz
 train_labels.npz
 website_deployment/.ipynb_checkpoints
+website_deployment/Models/3rd-color_comp_model.h5
