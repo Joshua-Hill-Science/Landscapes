@@ -52,7 +52,66 @@ def image_expl(model,image_array):
     return explained_image
     
     
-    
+class_names=['mountain', 'street', 'glacier', 'buildings', 'sea', 'forest']
+def pick_a_graph(model, image, color_coder, graph_type="bar"):
+    if graph_type == "bar":
+        fig_bar, ax = plt.subplots()
+        ax = plt.bar([0,1,2,3,4,5], model.predict(image)[0])
+        for i in color_coder:
+            if color_coder[i] == model.predict(image)[0].max():
+                ax[i].set_color("r")
+                Best_guess = mpatches.Patch(color='red', label=round(color_coder[i],2))
+            else:
+                ax[i].set_color("b")
+        plt.legend(handles=[Best_guess])
+        plt.title("Model's Confidence as a Bar Plot")
+        plt.ylabel("Model Confidence")
+        plt.xlabel("Classes")
+        ax = plt.xticks(ticks=[0,1,2,3,4,5],labels=[x.title() for x in class_names], size=10)
+        return fig_bar
+    elif graph_type == "donut":
+        fig_pie, ax = plt.subplots(subplot_kw=dict(aspect="equal"))
+        recipe = color_coder
+        data = color_coder.values()
+        wedges, texts = plt.pie(color_coder.values(), wedgeprops=dict(width=0.5), startangle=-40)
+        bbox_props = dict(boxstyle="square,pad=0.3", fc="w", ec="k", lw=0.72)
+        kw = dict(arrowprops=dict(arrowstyle="-"), bbox=bbox_props, zorder=0, va="center")
+
+        ax.legend(wedges, [x.title() for x in class_names], title="Classes")
+        for i, p in enumerate(wedges):
+            ang = (p.theta2 - p.theta1)/2. + p.theta1
+            y = np.sin(np.deg2rad(ang))
+            x = np.cos(np.deg2rad(ang))
+            horizontalalignment = {-1: "right", 1: "left"}[int(np.sign(x))]
+            connectionstyle = "angle,angleA=0,angleB={}".format(ang)
+            kw["arrowprops"].update({"connectionstyle": connectionstyle})
+            ax.annotate(round(color_coder[i],2), xy=(x, y), xytext=(1.35*np.sign(x), 1.4*y),
+                        horizontalalignment=horizontalalignment, **kw)
+        ax.set_title("Model's Confidence as a Pie Chart")
+        return fig_pie
+    elif graph_type == "lollipop":
+        # creating an empty chart
+        fig_lollipop, ax = plt.subplots()
+        # plotting using plt.stem
+        ax = plt.stem([0,1,2,3,4,5], model.predict(image)[0]
+                  ,use_line_collection=True, basefmt=' ')
+        plt.title("Model's Confidence as a Lollipop Graph")
+        plt.ylabel("Model Confidence")
+        plt.xlabel("Classes")
+        ax = plt.xticks(ticks=[0,1,2,3,4,5],labels=[x.title() for x in class_names])
+        return fig_lollipop
+    elif graph_type == "scatter":
+        fig_scatter= plt.figure()
+        ax1=fig_scatter.add_subplot(111)
+        ax1.scatter([0,1,2,3,4,5], model.predict(image)[0])
+        for i in color_coder:
+            if color_coder[i] == model.predict(image)[0].max():
+                ax1.scatter([i], model.predict(image)[0][i], c ='r')
+        plt.title("Model's Confidence as a Scatter Plot")
+        plt.ylabel("Model Confidence")
+        plt.xlabel("Classes")
+        ax1= plt.xticks(ticks=[0,1,2,3,4,5],labels=[x.title() for x in class_names])
+        return fig_scatter
     
     
     
@@ -96,6 +155,7 @@ else:
     prediction, new_image = import_and_predict(image, model)
     explained_image=image_expl(model, new_image)
     color_coder=dict(enumerate(prediction,0))
+    
     fig_bar, ax = plt.subplots()
     plt.title("Model's Probablity for Class of Given Image")
     ax=plt.bar([0,1,2,3,4,5], prediction, edgecolor='black')
@@ -113,7 +173,11 @@ else:
     with colb:
         st.image(new_image,caption="Color Compressed Image", width=500)
     with colc:
-        st.pyplot(fig_bar)
+        choice = st.selectbox("Graph Selector", ["Bar", "Donut", "Lollipop", "Scatter"])
+        result_fig=pick_a_graph(model, new_image, color_coder, choice.lower())
+        st.pyplot(result_fig)
+        
+# Lime required Section
     _,final,_ =st.columns([1,2,1])
     with final: 
         if st.button('How did the Model do that!?!',  help="Click Me to Find out!"):
