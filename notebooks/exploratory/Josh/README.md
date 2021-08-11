@@ -1,6 +1,6 @@
 # Josh's Jupyter Notebooks
 
-## ![EDA](EDA.ipynb# Beginning imports just to review data.)
+## ![EDA](EDA.ipynb#Beginning)
 
 Here I explored the data. Using Kaggle user Vincee loading code {https://www.kaggle.com/vincee/intel-image-classification-cnn-keras} I was able to convert image files into Numpy arrays. This allowed me to write a function that took the K-Nearest Neighbors cluster for each pixels color, average them and return an image.
 
