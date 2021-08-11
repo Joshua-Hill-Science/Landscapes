@@ -41,20 +41,20 @@ The goal of this project is to be able to input a landscape image into a model a
  
  Our final model used images that were compressed to 75 pixels square and had compressed color data. Here is an example of a before and after compressing:
  
- ![Before Compressing](notebooks/exploratory/Warren/Images/before.png)
+![Before Compressing](notebooks/exploratory/Warren/Images/before.png)
  
- ![After Compressing](notebooks/exploratory/Warren/Images/after.png)
+![After Compressing](notebooks/exploratory/Warren/Images/after.png)
  
  The final model has an accuracy of about 70% on the testing data that it has not seen before.
  
  We also used LIME to visualize how the model makes decisions. Below is an example of an original image, the LIME explainer image, and the models predictions. The green on the LIME image shows parts of the image that positively affect the model accuracy and the red negatively affects the model.
  
  
- ![Original](notebooks/exploratory/Warren/Images/originals/test #1777-mountain-preds.jpg)
+ ![Original](notebooks/exploratory/Warren/Images/originals/test \#1777-mountain-preds.jpg)
  
- ![LIME Explainer](notebooks/exploratory/Warren/Images/explainer/test #1777-mountain.jpg)
+ ![LIME Explainer](notebooks/exploratory/Warren/Images/explainer/test \#1777-mountain.jpg)
 
- ![Predictions](notebooks/exploratory/Warren/Images/preds/test #1777-mountain-preds.jpg) 
+ ![Predictions](notebooks/exploratory/Warren/Images/preds/test \#1777-mountain-preds.jpg) 
  
 
  
