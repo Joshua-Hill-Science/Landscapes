@@ -103,14 +103,18 @@ def pick_a_graph(model, image, color_coder, graph_type="bar"):
     elif graph_type == "scatter":
         fig_scatter= plt.figure()
         ax1=fig_scatter.add_subplot(111)
-        ax1.scatter([0,1,2,3,4,5], model.predict(image)[0])
+        X=[0,1,2,3,4,5]
+        y=model.predict(image)[0]
         for i in color_coder:
-            if color_coder[i] == model.predict(image)[0].max():
-                ax1.scatter([i], model.predict(image)[0][i], c ='r')
+            if color_coder[i] == y.max():
+                ax1.scatter([i], y[i], c ='r', marker="*", s=750)
+                ax1.scatter(np.delete(X,i), np.delete(y,i))
+                Best_guess = mpatches.Patch(color='red', label=round(color_coder[i],2))
+        plt.legend(handles=[Best_guess])
         plt.title("Model's Confidence as a Scatter Plot")
         plt.ylabel("Model Confidence")
         plt.xlabel("Classes")
-        ax1= plt.xticks(ticks=[0,1,2,3,4,5],labels=[x.title() for x in class_names])
+        ax1= plt.xticks(ticks=X,labels=[x.title() for x in class_names])
         return fig_scatter
     
     
@@ -126,7 +130,7 @@ with center_:
              # Intel Nature Image Predictor
              """
              )
-    st.markdown(" **Data found on Kaggle**:")
+    st.markdown(" ## **Data found on Kaggle**:")
     st.caption("https://www.kaggle.com/puneet6060/intel-image-classification")
 
 col1, col2, col3, col4, col5, col6 = st.columns(6)
@@ -143,13 +147,13 @@ with col5:
 with col6:
     st.image("Sample_Pictures/Street_Image.jpg", caption="Street Example", width= 250)
 
-st.write("This image classifier web app will predict which of 6 classes your uploaded Image should be.")
-st.write("Today we will be showing you how this Image performs in our model.")
+st.markdown("## This image classifier web app will predict which of 6 classes your uploaded Image should be.")
+st.markdown("## Today we will be showing you how this Image performs in our model.")
 
 file = st.file_uploader("Please upload an image file", type=["jpg","png"])
 #
 if file is None:
-    st.text("Please select an Image to be classified")
+    st.text("Please select an Image from the Kaggle Dataset to be classified")
 else:
     image = Image.open(file)
     prediction, new_image = import_and_predict(image, model)
