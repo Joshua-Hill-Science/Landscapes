@@ -10,3 +10,4 @@ clusted_images_test.npz
 test_labels.npz
 train_labels.npz
 website_deployment/Models
+website_deployment/Sample_Pictures/Demo
