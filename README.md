@@ -16,7 +16,8 @@ The goal of this project is to be able to input a landscape image into a model a
  To do this we implement a convolutional neural network that looks for patterns in the images. 
  
 
- A cnn applies a filter of weights to an input that allows the net to better pick up on important features in the images. 
+ A Convolutional Neural Network is a Deep Learning algorithm which can take in an input image, assign importance through learnable weights and biases to various aspects of an image and be able to differentiate  one from the other. Each image had a pixel structure of 150 x 150 x 3.
+Pixels split into 3 rgb layers, so 17,000 images with 150x150 pixels x 3 layers is a lot of pixels. CNNs help to reduce the images into a form which is easier to process, without losing features that are critical to getting a good prediction. Image matices are passed through a filter to extract the important feature. The new values then go through a pooling layer to reduce dimensionality. The matrices are then flattened and passed into a normal neural network. Finally, with back propagation, the filter values are adjusted to minimize the cost function. This process is repeated for each epoch.
  
  
  
