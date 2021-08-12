@@ -1,5 +1,5 @@
 # Landscape Image Classification
-  Using convolutional neural networks to classify images into their respective category.
+  #### Using convolutional neural networks to classify landscape images into their respective category.
 ## Table of Contents
   1. [Goal](https://github.com/Joshua-Hill-Science/Landscapes/blob/main/README.md#goal)
   2. [Data](https://github.com/Joshua-Hill-Science/Landscapes/blob/main/README.md#Data)
