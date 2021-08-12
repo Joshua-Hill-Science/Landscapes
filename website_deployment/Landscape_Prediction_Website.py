@@ -122,7 +122,8 @@ def pick_a_graph(model, image, color_coder, graph_type="bar"):
 # Start of the website
 # Loading in the Model
 model = tensorflow.keras.models.load_model("Models/3rd-color_comp_model.h5")
-st.set_page_config(layout="wide")
+page_image=("Sample_Pictures/Icon.jpg")
+st.set_page_config(page_title="Image Classification",page_icon=page_image,layout="wide")
 # Creating a centered layout
 _, center_,_ = st.columns([1,2,1])
 with center_:
