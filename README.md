@@ -26,26 +26,28 @@ The dataset can be found on kaggle here.
 ## Models
 We tried making many different models using images of different sizes and color compression.
 
-Baseline Model
+### Baseline Model
 The baseline model was made from only images compressed from 150 pixels square to 75 pixels square. This model overfit the training data a lot so it was obvious that some regularization would be needed. Here is a plot of the training and validation accuracy:
 
-Baseline Model Accuracies
+![Baseline_accuracy](https://user-images.githubusercontent.com/84738906/129249087-4c680cfd-9846-426a-bc92-4f7e676b8606.png)
+
 
 The big difference between training and validation accuracy shows overfitting to the training data.
 
-Final Model
-Our final model used images that were compressed to 75 pixels square and had compressed color data. Here is an example of a before and after compressing:
+### Final Model
+The final model I made adds l2 regularization and dropout layers to prevent overfitting. I also tune the learning rate to try to prevent the accuracy from fluctuating every 4 or so epochs. The model ended up with about a 78 train accuracy score and a 76 validation accuracy score. [Here](https://github.com/Joshua-Hill-Science/Landscapes/blob/ross/Project_4_Ross.ipynb) is a link to my collab notebook.
 
-Before Compressing
-
-After Compressing
-
-The final model has an accuracy of about 70% on the testing data that it has not seen before.
-
+## Lime
 We also used LIME to visualize how the model makes decisions. Below is an example of an original image, the LIME explainer image, and the models predictions. The green on the LIME image shows parts of the image that positively affect the model accuracy and the red negatively affects the model.
 
-Original
+#### Original:
 
-LIME Explainer
+![test_1777-mountain-preds-1](https://user-images.githubusercontent.com/84738906/129249355-a0b4acfa-77ff-430c-abb4-b28e13491e7b.jpg)
 
-Predictions
+#### LIME Explainer:
+
+![test_1777-mountain](https://user-images.githubusercontent.com/84738906/129249278-2f531925-484a-46d0-b243-a8b3ffeb0043.jpg)
+
+#### Predictions:
+
+![unnamed](https://user-images.githubusercontent.com/84738906/129249900-da956caf-c676-4681-a28b-c3f6eeaf20b1.png)
